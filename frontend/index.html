@@ -82,7 +82,7 @@
             resultDiv.innerHTML = `<p class="text-gray-400">⏳ Analyzing...</p>`;
 
             try {
-                const res = await fetch("http://127.0.0.1:8000/predict", {
+                const res = await fetch("https://tailwind1-ikqo.onrender.com/predict", {
                     method: "POST",
                     body: formData
                 });
