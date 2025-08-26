@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI Nutritionist</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+
+<body
+    class="min-h-screen bg-gradient-to-br from-gray-900 via-gray-800 to-black flex flex-col justify-between text-white">
+
+    <!-- Main Content -->
+    <div class="flex-grow flex items-center justify-center">
+        <div class="w-full max-w-lg bg-gray-900/80 p-8 rounded-2xl shadow-xl border border-gray-700">
+            <h1 class="text-3xl font-bold text-center mb-6">🍽️ AI Nutritionist</h1>
+            <p class="text-center text-gray-400 mb-6">Upload a food image to identify what it is</p>
+
+            <!-- Upload Section -->
+            <div class="space-y-4">
+                <input type="file" id="fileInput" accept="image/*" class="block w-full text-sm text-gray-300
+                 file:mr-4 file:py-2 file:px-4
+                 file:rounded-lg file:border-0
+                 file:text-sm file:font-semibold
+                 file:bg-green-600 file:text-white
+                 hover:file:bg-green-500 cursor-pointer" />
+
+                <!-- Image Preview -->
+                <div id="previewContainer" class="hidden mt-4">
+                    <p class="text-gray-400 text-sm mb-2">Preview:</p>
+                    <img id="previewImage" class="rounded-lg shadow-lg max-h-64 object-contain mx-auto" />
+                </div>
+
+                <!-- Upload Button -->
+                <button onclick="uploadImage()"
+                    class="w-full bg-green-600 hover:bg-green-500 py-2 rounded-lg font-semibold shadow-lg transition">
+                    Predict Food
+                </button>
+            </div>
+
+            <!-- Result -->
+            <div id="result" class="mt-6 p-4 bg-gray-800/60 rounded-lg hidden"></div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="text-center py-4 text-sm text-gray-500 border-t border-gray-700">
+        © 2025 <span class="font-semibold text-gray-300">Prashanth T</span>. All rights reserved.
+    </footer>
+
+    <script>
+        const fileInput = document.getElementById("fileInput");
+        const previewContainer = document.getElementById("previewContainer");
+        const previewImage = document.getElementById("previewImage");
+        const resultDiv = document.getElementById("result");
+
+        // Show preview when file selected
+        fileInput.addEventListener("change", () => {
+            const file = fileInput.files[0];
+            if (file) {
+                const reader = new FileReader();
+                reader.onload = (e) => {
+                    previewImage.src = e.target.result;
+                    previewContainer.classList.remove("hidden");
+                };
+                reader.readAsDataURL(file);
+            }
+        });
+
+        async function uploadImage() {
+            const file = fileInput.files[0];
+            if (!file) {
+                alert("Please select an image first.");
+                return;
+            }
+
+            const formData = new FormData();
+            formData.append("file", file);
+
+            resultDiv.classList.remove("hidden");
+            resultDiv.innerHTML = `<p class="text-gray-400">⏳ Analyzing...</p>`;
+
+            try {
+                const res = await fetch("http://127.0.0.1:8000/predict", {
+                    method: "POST",
+                    body: formData
+                });
+
+                if (!res.ok) throw new Error(`Server error: ${res.status}`);
+                const data = await res.json();
+
+                resultDiv.innerHTML = `
+          <p class="text-lg font-bold">📌 ${data.message}</p>
+          <p class="mt-2 text-gray-300">Prediction: <span class="font-semibold">${data.prediction || "None"}</span></p>
+          <p class="text-gray-300">Confidence: ${(data.confidence * 100).toFixed(1)}%</p>
+          <p class="text-sm text-gray-500 mt-2">File: ${data.filename} (${data.size_kb} KB)</p>
+        `;
+
+            } catch (err) {
+                resultDiv.innerHTML = `<p class="text-red-500">⚠️ ${err.message}</p>`;
+            }
+        }
+    </script>
+</body>
+
+</html>
