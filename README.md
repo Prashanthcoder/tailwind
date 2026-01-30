@@ -1,4 +1,4 @@
-# 🍽️ AI Nutritionist
+#  AI Nutritionist
 
 ![License](https://img.shields.io/badge/license-MIT-green)
 ![Status](https://img.shields.io/badge/status-active-success)
@@ -8,7 +8,7 @@ AI Nutritionist is a simple full‑stack web application that allows users to up
 
 ---
 
-## 🚀 What the project does
+##  Objectives of the project
 
 * Provides a modern web UI to upload food images
 * Sends images to a backend API for prediction
@@ -20,7 +20,7 @@ The frontend is built using **HTML + Tailwind CSS**, while the backend exposes a
 
 ---
 
-## 💡 Why this project is useful
+##  Why this project is useful
 
 * Great learning reference for **full‑stack ML projects**
 * Demonstrates **image upload handling** using `FormData`
@@ -34,7 +34,7 @@ The frontend is built using **HTML + Tailwind CSS**, while the backend exposes a
 
 ---
 
-## 🧩 Tech Stack
+##  Tech Stack
 
 * **Frontend**: HTML, Tailwind CSS, Vanilla JavaScript
 * **Backend**: FastAPI (hosted separately)
@@ -48,14 +48,14 @@ The frontend is built using **HTML + Tailwind CSS**, while the backend exposes a
 
 ## ⚙️ How to get started
 
-### 1️⃣ Clone the repository
+### 1️. Clone the repository
 
 ```bash
 git clone https://github.com/your-username/ai-nutritionist.git
 cd ai-nutritionist
 ```
 
-### 2️⃣ Open the frontend
+### 2️. Open the frontend
 
 This project uses plain HTML, so you can directly open the file:
 
@@ -75,7 +75,7 @@ Then open:
 http://localhost:8000
 ```
 
-### 3️⃣ Configure backend endpoint
+### 3️. Configure backend endpoint
 
 In `index.html`, update the API URL if needed:
 
@@ -98,7 +98,7 @@ Ensure the backend `/predict` endpoint:
 
 ---
 
-## 🧪 Example API Response
+##  Example API Response
 
 ```json
 {
@@ -112,7 +112,7 @@ Ensure the backend `/predict` endpoint:
 
 ---
 
-## 🆘 Where to get help
+##  Where to get help
 
 * Open an issue in the GitHub repository
 * Check backend API implementation (FastAPI docs)
@@ -125,9 +125,9 @@ Useful links:
 
 ---
 
-## 🤝 Contributing
+##  Contributing
 
-Contributions are welcome! 🎉
+Contributions are welcome! 
 
 Please read the contribution guidelines before submitting a PR:
 
@@ -150,7 +150,7 @@ Passionate about AI, ML, and full‑stack development
 
 ---
 
-## 📌 Roadmap (Optional Ideas)
+##  Roadmap (Optional Ideas)
 
 * Food calorie estimation
 * Portion size detection
